@@ -1,8 +1,10 @@
-import {FILTER_BY_TYPE, GET_POKEMONS, ORDER_BY_NAME, ORDER_BY_POWER} from '../actions/index'
+import {GET_QUERY_NAME, FILTER_BY_TYPE, GET_POKEMONS, ORDER_BY_NAME, ORDER_BY_POWER, POST_POKEMON, GET_TYPE, GET_BY_ID, FILTER_BY_ORIGIN} from '../actions/index'
 
 const initialState = {
     pokemons: [],
-    allPokemons: []
+    allPokemons: [],
+    detail: [],
+    types: []
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -68,7 +70,32 @@ export default function rootReducer(state = initialState, action) {
                     ...state,
                     pokemons: sortp
                 }
-
+                case GET_QUERY_NAME:
+                    return{
+                        ...state,
+                        pokemons: [action.payload]
+                    }
+                case POST_POKEMON:
+                    return{
+                        ...state
+                    }
+                case GET_TYPE:
+                    return{
+                        ...state,
+                        types: action.payload
+                    }
+                case GET_BY_ID:
+                    return{
+                        ...state,
+                        detail: action.payload
+                    }
+                case FILTER_BY_ORIGIN:
+                    let allPoke = state.allPokemons
+                    let filter = action.payload === 'db' ? allPoke.filter(e => e.db) : allPoke.filter(e => !e.db)
+                    return {
+                        ...state,
+                        pokemons: action.payload === 'all' ? allPoke : filter
+                    }
         default: return state;
     }
 }

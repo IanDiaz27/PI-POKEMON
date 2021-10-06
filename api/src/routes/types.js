@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
                 let types = resp.results.map(p => p.name)
                 let arr = []
                 for(let i = 0; i < types.length; i++){
-                    arr.push({nombre: types[i]})
+                    arr.push({name: types[i]})
                 }
                 Tipo.bulkCreate(arr);
                 res.send(arr)

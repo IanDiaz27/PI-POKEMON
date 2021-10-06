@@ -1,18 +1,24 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getById } from "../../actions";
+import { getDetail } from "../../actions";
 
 const Detail = (props) => {
-    const dispatch = useDispatch();
-    const pokeDetail = useSelector(state => state.pokemonDetail)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getById(props.match.params.id))
-    },[])
-    
+        dispatch(getDetail(props.match.params.id))
+    },[dispatch])
+
+    const poke = useSelector((state) => state.detail)
+
     return(
         <div>
-            <h1>{pokeDetail[0].name}</h1>
+            {
+                <div>
+                    <h1>Soy {poke.name}</h1>
+                </div> 
+            }
         </div>
     )
 }

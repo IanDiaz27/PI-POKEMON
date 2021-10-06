@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { Link } from "react-router-dom";
-import { filterByType, getPokemons, orderByName, orderByPower } from "../../actions";
+import { filterByOrigin, filterByType, getPokemons, orderByName, orderByPower } from "../../actions";
 import Card from "../Card/Card.jsx"
 import Paginado from "../Paginado/Paginado";
+import SearchBar from "../SearchBar/SearchBar";
 
 const Home = () =>{
     const dispatch = useDispatch()
@@ -13,7 +14,7 @@ const Home = () =>{
     const [orden, setOrden] = useState('')
     const lastPokemon = currentPage * pokemonsPerPage;
     const firstPokemon = lastPokemon - pokemonsPerPage;
-    const currentPokemons = allPokemons.slice(firstPokemon, lastPokemon)
+    const currentPokemons = allPokemons && allPokemons.slice(firstPokemon, lastPokemon) 
 
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber)
@@ -46,8 +47,13 @@ const Home = () =>{
         setOrden(`Ordenado ${e.target.value}`)
     }
 
+    const handleOrigin = (e) => {
+        dispatch(filterByOrigin(e.target.value))
+    }
+
     return(
         <div>
+            <SearchBar/>
             <Link to = '/pokemons'>Crear Pokemon</Link>
             <h1>Home Pokemon</h1>
             <button onClick = {e => {handleClick(e)}}>
@@ -62,7 +68,8 @@ const Home = () =>{
                    <option value='asc'>Ascendente</option>
                    <option value='desc'>Descendente</option>
                </select>
-               <select>
+               <select onChange = {e => handleOrigin(e)}>
+                   <option value='all'>All</option>
                    <option value='api'>Api</option>
                    <option value='db'>Creados</option>
                </select>
@@ -93,7 +100,7 @@ const Home = () =>{
                     pokemonsPerPage = {pokemonsPerPage}
                     allPokemons = {allPokemons.length}
                     paginado = {paginado}/>
-               {
+               {    
                     currentPokemons.map((e, i) => {
                         return(
                            <div key = {i}>

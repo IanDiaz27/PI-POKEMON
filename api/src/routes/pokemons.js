@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
     let {name} = req.query;
     if(name){ //Si me mandan un name por query
         Pokemon.findOne({
-            where: {nombre: name},
+            where: {name: name},
             include: Tipo
         })
         .then(respDb => {
@@ -43,6 +43,7 @@ router.get("/", (req, res) => {
                     let pokeFinal = [];
                     allPokeData.map(r =>{
                         pokeFinal.push({
+                            id: r.id,
                             name: r.name,
                             types: r.types.map(p => p.type.name),
                             img: r.sprites.other['official-artwork'].front_default,
@@ -56,7 +57,17 @@ router.get("/", (req, res) => {
                             height: r.height
                         })
                     })
-                    return res.json(pokeFinal)
+                    Pokemon.findAll({
+                        include: {
+                            model: Tipo,
+                            attributes: ['name']
+                        }
+                    })
+                    .then(respDb => {
+                        let allPokemonsFinal = (pokeFinal.concat(respDb))
+                        return res.json(allPokemonsFinal)
+                    })
+                    // return res.json(allPokemonsFinal)
                 })
             })
         })
@@ -65,27 +76,27 @@ router.get("/", (req, res) => {
 
 router.post('/', (req, res) => {
     let {
-        nombre,
-        vida,
-        fuerza,
-        defensa,
-        velocidad,
-        altura,
-        peso,
-        tipos
+        name,
+        hp,
+        attack,
+        defense,
+        speed,
+        height,
+        weight,
+        types
     } = req.body;
 
         Pokemon.create({
-            nombre,
-            vida,
-            fuerza,
-            defensa,
-            velocidad,
-            altura,
-            peso,
+            name,
+            hp,
+            attack,
+            defense,
+            speed,
+            height,
+            weight,
         })
         .then(pokemon => {
-            pokemon.addTipo(tipos).then(() => {
+            pokemon.addTipo(types).then(() => {
                 res.send('Pokemon Creado')
             })
         })

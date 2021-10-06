@@ -10,26 +10,29 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true
     },
-    nombre: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    vida: {
+    hp: {
       type: DataTypes.STRING
     },
-    fuerza: {
+    attack: {
       type: DataTypes.STRING
     },
-    defensa: { 
+    defense: { 
       type: DataTypes.STRING
     },
-    velocidad: {
+    speed: {
       type: DataTypes.STRING
     },
-    altura: {
+    height: {
       type: DataTypes.STRING
     },
-    peso: {
+    weight: {
+      type: DataTypes.STRING
+    },
+    img: {
       type: DataTypes.STRING
     },
     db: {
