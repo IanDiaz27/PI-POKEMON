@@ -1,0 +1,106 @@
+*{
+    margin:0;
+}
+
+.contain{
+    display: flex;
+    justify-content: space-between;
+}
+
+.background{
+    background-color: rgb(219, 213, 213);
+}
+
+.title{
+    display: inline-flex;
+    justify-content: center;
+    font-size: 40px;
+    margin-top: 15px;
+    margin-right: -160px;
+}
+
+.card{
+    display: inline-flex;
+    margin: 13px;
+}
+
+.create{
+    display: inline-flex;
+    text-decoration: none;
+    border-radius: 13px;
+    height: 45px;
+    width: 170px;
+    align-items: center;
+    margin: 15px;
+    border: outset white;
+    font-weight: 600;
+}
+.create:hover{
+    cursor: pointer;
+    background-color: rgb(199, 194, 194);
+    box-shadow: rgb(151, 151, 151) -2px 2px 0;
+}
+
+.link{
+    text-decoration: none;
+}
+
+.filter{
+    margin: 5px 15px;
+    width: 170px;
+    height: 40px;
+    border-radius: 50px;
+    border: outset;
+    font-weight: 600;
+}
+.filter:hover{
+    cursor: pointer;
+    background-color: rgb(199, 194, 194);
+    box-shadow: rgb(151, 151, 151) -2px 2px 0;
+}
+
+.select{
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+    margin-bottom: 0;
+    background-color: rgb(192, 190, 189);
+    font-weight: 600;
+}
+
+.az{
+    font-weight: 600;
+    border-radius:20px;
+    width: 80px;
+    height: 40px;
+    border: outset;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.power{
+    font-weight: 600;
+    border-radius:20px;
+    width: 180px;
+    height: 40px;
+    border: outset;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.api{
+    font-weight: 600;
+    border-radius:20px;
+    width: 140px;
+    height: 40px;
+    border: outset;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.tipo{
+    font-weight: 600;
+    border-radius:20px;
+    width: 150px;
+    height: 40px;
+    border: outset;
+    cursor: pointer;
+    margin-top: 5px;
+}

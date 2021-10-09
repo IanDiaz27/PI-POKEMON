@@ -1,0 +1,26 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+    width: 300px;
+    background-color: rgb(192, 190, 189);
+    border-radius: 50px;
+    border: solid 5px rgb(219, 213, 213) ;
+}
+.card:hover{
+    border: solid 5px rgb(139, 139, 139);
+    background-color: rgb(172, 169, 169);
+}
+
+.img{
+    height: 250px;
+}
+
+.name{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+}

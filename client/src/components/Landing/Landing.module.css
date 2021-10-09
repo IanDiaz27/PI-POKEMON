@@ -1,6 +1,63 @@
+@font-face {
+    font-family: 'gba';
+    src: url('../pokemon_gb-webfont.woff');
+    font-style: normal;
+    font-weight: 100;
+  }
+
+*{
+    font-family: 'gba', sans-serif;
+}
+
 .background{
     background-image: url(https://scontent.faep7-1.fna.fbcdn.net/v/t1.6435-9/120792223_108813930992194_6679149547787749679_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=e3f864&_nc_eui2=AeHTCxJ6qksE05cbF-GVT-9XMmVmjL816L4yZWaMvzXovkMhuj6rZWUx1-W_geOGOylRh0jJTPLElU6ojgFvpe9f&_nc_ohc=HeJx8aUHifAAX_Us1ri&_nc_ht=scontent.faep7-1.fna&oh=4182c1cd923fa8ce4cea5e806cf3a8c1&oe=61824344);
     width: 100vw;
     height: 100vh;
-    font-family: 'Open Sans', sans-serif;;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.title{
+    color: white;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    padding-top: 230px;
+    font-size: 50px;
+    text-shadow: rgb(11, 11, 51) -5px 5px 0;
+    font-weight: 900;
+}
+
+.btn{
+    border-radius: 50px;
+    border: solid rgb(11, 11, 51);
+    width: 300px;
+    height: 50px;
+    display: flex;
+    margin: auto;
+    margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 900;
+    text-decoration: none;
+    }
+.btn:hover{
+    cursor: pointer;
+    border: solid white;
+    background-color: rgb(11, 11, 51);
+    color: white;
+}
+
+.link{
+    text-decoration: none;
+}
+
+.name{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 270px;
+    margin-right: 5px;
 }

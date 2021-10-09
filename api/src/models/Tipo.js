@@ -5,7 +5,8 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('tipo', {
     name: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
       }
   })
 }

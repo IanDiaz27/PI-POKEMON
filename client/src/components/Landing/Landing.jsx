@@ -6,10 +6,11 @@ import style from './Landing.module.css'
 export default function Landing(){
     return(
         <div className = {style.background}>
-            <h1>Pagina Pokemon</h1>
-            <Link to = '/home'>
-                <button>Ingresar</button>
+            <h1 className = {style.title}>Pagina Pokemon</h1>
+            <Link to = '/home' className = {style.link}>
+                <button className = {style.btn}>Ingresar</button>
             </Link>
+            <span className = {style.name}>By Ian Diaz</span>
         </div>
     )
 }

@@ -1,0 +1,30 @@
+.search{
+    display: inline-flex;
+}
+
+.input{
+    height: 30px;
+    width: 200px;
+    border-radius: 50px;
+    margin:10px;
+    border: outset;
+}
+.input:hover{
+    box-shadow: rgb(151, 151, 151) -2px 2px 0;
+}
+
+.btn{
+    height: 34px;
+    width: 100px;
+    border-radius: 50px;
+    align-items: center;
+    margin-top: 10px;
+    margin-right: 20px;
+    border: outset;
+    font-weight: 600;
+}
+.btn:hover{
+    cursor: pointer;
+    background-color: rgb(199, 194, 194);
+    box-shadow: rgb(151, 151, 151) -2px 2px 0;
+}

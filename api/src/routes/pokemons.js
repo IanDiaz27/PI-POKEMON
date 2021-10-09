@@ -21,9 +21,9 @@ router.get("/", (req, res) => {
         .then(r => {
             let pokemon = {
                 id: r.id,
-                name: r.name,
-                types: r.types.map(p => p.type.name),
-                img: r.sprites.other['official-artwork'].front_default
+                name: r.name.toUpperCase(),
+                types: r.types.map(p => p.type.name + ' '),
+                img: r.sprites.front_default
             }
             return res.json(pokemon)
         })
@@ -44,17 +44,12 @@ router.get("/", (req, res) => {
                     allPokeData.map(r =>{
                         pokeFinal.push({
                             id: r.id,
-                            name: r.name,
-                            types: r.types.map(p => p.type.name),
-                            img: r.sprites.other['official-artwork'].front_default,
+                            name: r.name.toUpperCase(),
+                            types: r.types.map(p => p.type.name + ' '),
+                            img: r.sprites.front_default,
+                            imgb: r.sprites.back_default,
                             hp: r.stats[0].base_stat,
                             attack: r.stats[1].base_stat,
-                            defense: r.stats[2].base_stat,
-                            specialAttack: r.stats[3].base_stat,
-                            specialDefense: r.stats[4].base_stat,
-                            speed: r.stats[5].base_stat,
-                            weight: r.weight,
-                            height: r.height
                         })
                     })
                     Pokemon.findAll({
@@ -117,9 +112,10 @@ router.get('/:idPokemon', (req, res) => {
         .then(r => r.data)
         .then(r => {
             let pokemon = {
-                name: r.name,
-                types: r.types.map(p => p.type.name),
-                img: r.sprites.other['official-artwork'].front_default,
+                name: r.name.toUpperCase(),
+                types: r.types.map(p => p.type.name + ' '),
+                img: r.sprites.front_default,
+                imgb: r.sprites.back_default,
                 hp: r.stats[0].base_stat,
                 attack: r.stats[1].base_stat,
                 defense: r.stats[2].base_stat,
