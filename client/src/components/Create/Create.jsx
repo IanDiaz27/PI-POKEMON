@@ -91,10 +91,6 @@ const Create = () => {
         }
     }
 
-    useEffect(() => {
-        dispatch(getTypes())
-    },[])
-
     return(
         <div>
             <Link to = '/home'>

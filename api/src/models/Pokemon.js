@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING
     },
     img: {
-      type: DataTypes.STRING
+      type: DataTypes.TEXT
     },
     db: {
       type: DataTypes.BOOLEAN,

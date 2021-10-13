@@ -14,6 +14,11 @@ const Detail = (props) => {
     },[dispatch])
 
     const poke = useSelector((state) => state.detail)
+    let tipos
+    if(poke.tipos){
+        tipos = poke.tipos.map(e => e.name + ' ')
+    }
+
     return(
         <div className = {style.conteiner} key={poke.id}>
             {
@@ -22,7 +27,7 @@ const Detail = (props) => {
                     <div className = {style.photo}>
                         <img src={poke.img ? poke.img : imagen} className = {style.img}/>
                     </div>
-                    <h2>{poke.types}</h2>
+                    <h2>{poke.types ? poke.types : tipos}</h2>
                     <div>
                         <div className = {style.points}>
                             <h2>Hp:</h2>

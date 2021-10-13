@@ -1,13 +1,13 @@
 import axios from 'axios';
 export const GET_POKEMONS = 'GET_POKEMONS';
-export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
-export const ORDER_BY_NAME = 'ORDER_BY_NAME';
-export const ORDER_BY_POWER = 'ORDER_BY_POWER';
 export const GET_QUERY_NAME = 'GET_QUERY_NAME';
 export const GET_TYPE = 'GET_TYPE';
-export const POST_POKEMON = 'POST_POKEMON';
 export const GET_BY_ID = 'GET_BY_ID';
+export const ORDER_BY_NAME = 'ORDER_BY_NAME';
+export const ORDER_BY_POWER = 'ORDER_BY_POWER';
+export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
 export const FILTER_BY_ORIGIN = 'FILTER_BY_ORIGIN';
+export const POST_POKEMON = 'POST_POKEMON';
 
 export const getPokemons = () => {
     return function(dispatch){
@@ -19,27 +19,6 @@ export const getPokemons = () => {
                 payload: r
             })
         })
-    }
-}
-
-export const filterByType = (payload) => {
-    return{
-        type: FILTER_BY_TYPE,
-        payload
-    }
-}
-
-export const orderByName = (payload) => {
-    return{
-        type: ORDER_BY_NAME,
-        payload
-    }
-}
-
-export const orderByPower = (payload) => {
-    return{
-        type: ORDER_BY_POWER,
-        payload
     }
 }
 
@@ -71,15 +50,6 @@ export const getTypes = () => {
     }
 }
 
-export const postPokemon = (payload) => {
-    return function(dispatch){
-        return axios.post('http://localhost:3001/pokemons', payload)
-        .then(r => {
-            return r
-        })
-    }
-}
-
 export const getDetail = (payload) => {
     return function(dispatch){
         return axios.get('http://localhost:3001/pokemons/' + payload)
@@ -93,9 +63,39 @@ export const getDetail = (payload) => {
     }
 }
 
+export const orderByName = (payload) => {
+    return{
+        type: ORDER_BY_NAME,
+        payload
+    }
+}
+
+export const orderByPower = (payload) => {
+    return{
+        type: ORDER_BY_POWER,
+        payload
+    }
+}
+
+export const filterByType = (payload) => {
+    return{
+        type: FILTER_BY_TYPE,
+        payload
+    }
+}
+
 export const filterByOrigin = (payload) => {
     return {
         type: FILTER_BY_ORIGIN,
         payload
+    }
+}
+
+export const postPokemon = (payload) => {
+    return function(dispatch){
+        return axios.post('http://localhost:3001/pokemons', payload)
+        .then(r => {
+            return r
+        })
     }
 }

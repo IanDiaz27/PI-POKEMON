@@ -48,7 +48,6 @@ router.get("/", (req, res) => {
                             types: r.types.map(p => p.type.name + ' '),
                             img: r.sprites.front_default,
                             imgb: r.sprites.back_default,
-                            hp: r.stats[0].base_stat,
                             attack: r.stats[1].base_stat,
                         })
                     })
@@ -78,6 +77,7 @@ router.post('/', (req, res) => {
         speed,
         height,
         weight,
+        img,
         types
     } = req.body;
 
@@ -89,6 +89,7 @@ router.post('/', (req, res) => {
             speed,
             height,
             weight,
+            img
         })
         .then(pokemon => {
             pokemon.addTipo(types).then(() => {
