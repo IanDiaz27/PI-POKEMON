@@ -5,12 +5,14 @@ import { filterByOrigin, filterByType, getPokemons, getTypes, orderByName, order
 import Card from "../Card/Card.jsx"
 import Paginado from "../Paginado/Paginado";
 import SearchBar from "../SearchBar/SearchBar";
+import Loading from "../Loading/Loading";
 
 import style from './Home.module.css'
 
 const Home = () =>{
     const dispatch = useDispatch()
     const allPokemons = useSelector((state) => state.pokemons)
+    const loading = useSelector((state) => state.loading)
     const [currentPage, setCurrentPage] = useState(1);
     const [pokemonsPerPage, setPokemonsPerPage] = useState(12);
     const [orden, setOrden] = useState('')
@@ -56,11 +58,16 @@ const Home = () =>{
     }
     return(
         <div className = {style.background}>
+            <div className = {style.head}>
+                <Link to = '/about'className = {style.span}>
+                    <span>About</span>
+                </Link>
+                <h1 className = {style.title}>PokeApp</h1>
+            </div>
             <div className = {style.contain}>
                 <Link to = '/pokemons' className={style.link}>
                     <button className={style.create}>Crear Pokemon</button>
                 </Link>
-                <h1 className = {style.title}>PokeApp</h1>
                 <SearchBar/>
             </div>
             <div>
@@ -73,7 +80,7 @@ const Home = () =>{
                         <option value='invalf'>Z-A</option>
                     </select>
                     <select onChange = {e => handleOrderByAttack(e)} className = {style.power}>
-                        <option value='asc'>Power MIN</option>
+                        <option value='asc'>Power Min</option>
                         <option value='desc'>Power Max</option>
                     </select>
                     <select onChange = {e => handleOrigin(e)} className = {style.api}>
@@ -105,39 +112,44 @@ const Home = () =>{
                         <option value='shadow '>Shadow</option>
                     </select>
                </div>
-               <Paginado
-                    pokemonsPerPage = {pokemonsPerPage}
-                    allPokemons = {allPokemons.length}
-                    paginado = {paginado}/>
-               {    
-                    currentPokemons && currentPokemons.map((e, i) => {
-                        if(e.types){
-                            return(
-                                <div key = {i} className = {style.card}>
-                                    <Link to = {`/home/${e.id}`} className={style.link}>
-                                        <Card name={e.name} img={e.img} types={e.types}/>
-                                    </Link>
-                                </div>
-                            )
-                        } else if (e.tipos) {
-                            return(
-                                <div key = {i} className = {style.card}>
-                                    <Link to = {`/home/${e.id}`} className={style.link}>
-                                        <Card name={e.name} img={e.img} types={e.tipos.map(e => e.name)}/>
-                                    </Link>
-                                </div>
-                            )
-                        } else if (!e.types && !e.tipos) {
-                            return(
-                                <h1>El pokemon NO existe</h1>
-                            )
-                        }
-                    })
-               }
-               <Paginado
-                    pokemonsPerPage = {pokemonsPerPage}
-                    allPokemons = {allPokemons.length}
-                    paginado = {paginado}/>
+               {
+                (loading) ? <Loading/> :
+                <div>
+                    <Paginado
+                        pokemonsPerPage = {pokemonsPerPage}
+                        allPokemons = {allPokemons.length}
+                        paginado = {paginado}/>
+                    {    
+                        currentPokemons && currentPokemons.map((e, i) => {
+                            if(e.types){
+                                return(
+                                    <div key = {i} className = {style.card}>
+                                        <Link to = {`/home/${e.id}`} className={style.link}>
+                                            <Card name={e.name} img={e.img} types={e.types}/>
+                                        </Link>
+                                    </div>
+                                )
+                            } else if (e.tipos) {
+                                return(
+                                    <div key = {i} className = {style.card}>
+                                        <Link to = {`/home/${e.id}`} className={style.link}>
+                                            <Card name={e.name} img={e.img} types={e.tipos.map(e => e.name + ' ')}/>
+                                        </Link>
+                                    </div>
+                                )
+                            } else if (!e.types && !e.tipos) {
+                                return(
+                                    <h1 className = {style.not}>El pokemon NO existe</h1>
+                                )
+                            }
+                        })
+                    }
+                    <Paginado
+                        pokemonsPerPage = {pokemonsPerPage}
+                        allPokemons = {allPokemons.length}
+                        paginado = {paginado}/>
+                </div>
+                }
             </div>
         </div>
     )

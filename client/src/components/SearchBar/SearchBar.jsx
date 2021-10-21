@@ -28,6 +28,7 @@ const SearchBar = () => {
             type = 'text'
             placeholder = ' Buscar...'
             onChange = {(e) => handleInputChange(e)}
+            value = {name}
             className = {style.input}
             />
             <button type = 'submit' onClick = {(e) => handleSubmit(e)} className = {style.btn}>Buscar</button>

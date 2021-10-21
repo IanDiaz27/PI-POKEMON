@@ -6,35 +6,35 @@ const router = Router()
 
 router.get("/", (req, res) => {
     let {name} = req.query;
-    if(name){ //Si me mandan un name por query
-        Pokemon.findOne({
-            where: {name: name},
-            include: Tipo
-        })
-        .then(respDb => {
-            if(respDb){
-                return res.json(respDb)
-            }
-        })
-        axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
-        .then(r => r.data)
-        .then(r => {
-            let pokemon = {
-                id: r.id,
-                name: r.name.toUpperCase(),
-                types: r.types.map(p => p.type.name + ' '),
-                img: r.sprites.front_default
-            }
-            return res.json(pokemon)
-        })
-    } else { //Si no me mandan un name por query
+    // if(name){ 
+    //     Pokemon.findOne({
+    //         where: {name: name},
+    //         include: Tipo
+    //     })
+    //     .then(respDb => {
+    //         if(respDb){
+    //             return res.json(respDb)
+    //         }
+    //     })
+    //     axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+    //     .then(r => r.data)
+    //     .then(r => {
+    //         let pokemon = {
+    //             id: r.id,
+    //             name: r.name.toUpperCase(),
+    //             types: r.types.map(p => p.type.name + ' '),
+    //             img: r.sprites.front_default
+    //         }
+    //         return res.json(pokemon)
+    //     })
+    // } else {
         axios.get('https://pokeapi.co/api/v2/pokemon')
         .then(respI => {
             let pokemonsI = respI.data.results;
             axios.get(respI.data.next)
             .then(respII => {
                 let pokemonsII = respII.data.results;
-                let allPokemons = pokemonsI.concat(pokemonsII) // Tengo los 40 pokemons
+                let allPokemons = pokemonsI.concat(pokemonsII) 
                 let pokeUrl = allPokemons.map(r => r.url)
                 let pokePromises = pokeUrl.map(url => axios.get(url));
                 Promise.all(pokePromises)
@@ -59,13 +59,28 @@ router.get("/", (req, res) => {
                     })
                     .then(respDb => {
                         let allPokemonsFinal = (pokeFinal.concat(respDb))
-                        return res.json(allPokemonsFinal)
+                        if(name){ 
+                            let pokeName = allPokemonsFinal.filter(e => e.name.toLowerCase() === name)
+                            if(pokeName.length === 1) return res.json(pokeName[0])
+                            else {
+                                axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+                                .then(r => r.data)
+                                .then(r => {
+                                    let pokemon = {
+                                        id: r.id,
+                                        name: r.name.toUpperCase(),
+                                        types: r.types.map(p => p.type.name + ' '),
+                                        img: r.sprites.front_default,
+                                        imgb: r.sprites.back_default
+                                    }
+                                    return res.json(pokemon)
+                                })
+                            }
+                        } else return res.json(allPokemonsFinal)
                     })
-                    // return res.json(allPokemonsFinal)
                 })
             })
         })
-    }
 })
 
 router.post('/', (req, res) => {
@@ -113,6 +128,7 @@ router.get('/:idPokemon', (req, res) => {
         .then(r => r.data)
         .then(r => {
             let pokemon = {
+                id: r.id,
                 name: r.name.toUpperCase(),
                 types: r.types.map(p => p.type.name + ' '),
                 img: r.sprites.front_default,

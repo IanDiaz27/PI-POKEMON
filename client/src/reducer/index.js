@@ -6,13 +6,15 @@ import {GET_POKEMONS,
     ORDER_BY_POWER, 
     FILTER_BY_TYPE, 
     FILTER_BY_ORIGIN,
-    POST_POKEMON} from '../actions/index'
+    POST_POKEMON,
+    SET_LOADING} from '../actions/index'
 
 const initialState = {
     pokemons: [],
     allPokemons: [],
     detail: [],
-    types: []
+    types: [],
+    loading: false
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -22,11 +24,14 @@ export default function rootReducer(state = initialState, action) {
                 ...state,
                 pokemons: action.payload,
                 allPokemons: action.payload,
+                detail: [],
+                loading: false,
             }
         case GET_QUERY_NAME:
             return{
                 ...state,
                 pokemons: [action.payload],
+                loading: false
             }
         case GET_TYPE:
                 return{
@@ -36,7 +41,8 @@ export default function rootReducer(state = initialState, action) {
         case GET_BY_ID:
             return{
                 ...state,
-                detail: action.payload
+                detail: action.payload,
+                loading: false
             }
         case ORDER_BY_NAME:
             let sort = action.payload === 'alf' ? 
@@ -88,7 +94,14 @@ export default function rootReducer(state = initialState, action) {
             }
         case FILTER_BY_TYPE:
             let allPokemons = state.allPokemons;
-            let filtered = action.payload === 'all' ? allPokemons : allPokemons.filter(p => {if(p.types.includes(action.payload)) return p})
+            let filtered = action.payload === 'all' ? allPokemons : allPokemons.filter(p => {
+                if(p.tipos){
+                    let tipos = p.tipos.map(e => e.name) 
+                    if (tipos.includes(action.payload)) return p
+                } else if (p.types){
+                    if(p.types.includes(action.payload)) return p
+                }
+            })
             return{
                 ...state,
                 pokemons: filtered
@@ -103,6 +116,11 @@ export default function rootReducer(state = initialState, action) {
         case POST_POKEMON:
             return{
                 ...state
+            }
+        case SET_LOADING:
+            return{
+                ...state,
+                loading: true
             }
         default: return state;
     }

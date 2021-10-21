@@ -15,7 +15,7 @@
     margin-top: 25px;
     border-radius: 50px;
     background-color: rgb(192, 190, 189);
-    border: solid 5px rgb(139, 139, 139);
+    border: outset 5px rgb(179, 75, 75) ;
 }
 
 .photo{
@@ -31,4 +31,18 @@
     margin: 15px;
     margin-left: 30px;
     font-size: 12px;
+}
+.home{
+    font-size: 18px;
+    font-weight: 600;
+    width: 150px;
+    height: 50px;
+    margin-left: -660px;
+    border-radius: 50px;
+    border: outset white; 
+}
+.home:hover{
+    cursor: pointer;
+    background-color: rgb(199, 194, 194);
+    box-shadow: rgb(151, 151, 151) -2px 2px 0;
 }

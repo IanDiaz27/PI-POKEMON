@@ -1,0 +1,11 @@
+.load{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+
+.gif{
+    margin-top: 20px;
+    width: 250px;
+}

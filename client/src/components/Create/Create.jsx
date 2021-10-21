@@ -10,8 +10,8 @@ const validate = (input) => {
     if(!input.name){
         errors.name = 'Se requiere un Nombre'
     }
-    if(!input.hp || !parseInt(input.hp)){
-        errors.hp = 'Se requiere hp y debe ser un numero'
+    if(!input.hp || !parseInt(input.hp) || parseInt(input.hp) < 0){
+        errors.hp = 'Se requiere hp, debe ser un numero y positivo'
     }
     if(!input.attack || !parseInt(input.attack)){
         errors.attack = 'Se requiere ataque y debe ser un numero'
@@ -71,7 +71,7 @@ const Create = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(input)
-        if(!input.name || !input.hp || !input.attack || !input.defense || !input.speed || !input.height || !input.weight || input.types.length === 0){
+        if(errors.name || errors.hp || errors.attack || errors.defense || errors.speed || errors.height || errors.weight || input.types.length === 0){
             alert('Hay campos sin completar')
         } else {
             dispatch(postPokemon(input))

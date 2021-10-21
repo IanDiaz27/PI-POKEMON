@@ -8,9 +8,12 @@ export const ORDER_BY_POWER = 'ORDER_BY_POWER';
 export const FILTER_BY_TYPE = 'FILTER_BY_TYPE';
 export const FILTER_BY_ORIGIN = 'FILTER_BY_ORIGIN';
 export const POST_POKEMON = 'POST_POKEMON';
+export const SET_LOADING = 'SET_LOADING';
+export const RESET_POKEMONS = 'RESET_POKEMONS';
 
 export const getPokemons = () => {
     return function(dispatch){
+        dispatch(setLoading())
         return axios.get('http://localhost:3001/pokemons')
         .then(r => r.data)
         .then(r => {
@@ -25,6 +28,7 @@ export const getPokemons = () => {
 export const getQueryName = (payload) => {
     return async(dispatch) =>{
         try{
+            dispatch(setLoading())
             await axios.get('http://localhost:3001/pokemons?name=' + payload)
             .then(r => { dispatch({
                 type: GET_QUERY_NAME,
@@ -52,6 +56,7 @@ export const getTypes = () => {
 
 export const getDetail = (payload) => {
     return function(dispatch){
+        dispatch(setLoading())
         return axios.get('http://localhost:3001/pokemons/' + payload)
         .then(r => r.data)
         .then(r => {
@@ -97,5 +102,11 @@ export const postPokemon = (payload) => {
         .then(r => {
             return r
         })
+    }
+}
+
+export const setLoading = () => {
+    return {
+        type: SET_LOADING
     }
 }
